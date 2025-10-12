@@ -18,6 +18,7 @@ const SearchOrder = () => {
         onChange={(e) => setQuery(e.target.value)}
         type="text"
         placeholder="Order number"
+        className="bg-white"
       />
     </form>
   );
