@@ -5,14 +5,11 @@ import { getMenu } from "../../services/apiRestaurant";
 function Menu() {
   const menu = useLoaderData();
   return (
-    <div>
-      <h2>Menu</h2>
-      <ul>
-        {menu.map((pizza) => (
-          <MenuItem key={pizza.id} pizza={pizza} />
-        ))}
-      </ul>
-    </div>
+    <ul className="divide-y divide-stone-200 px-2">
+      {menu.map((pizza) => (
+        <MenuItem key={pizza.id} pizza={pizza} />
+      ))}
+    </ul>
   );
 }
 
