@@ -7,6 +7,7 @@ const isValidPhone = (str) =>
 import { Form, redirect, useActionData, useNavigation } from "react-router";
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
+import { useSelector } from "react-redux";
 
 const fakeCart = [
   {
@@ -38,6 +39,7 @@ function CreateOrder() {
   const isSubmitting = navigation.state === "submitting";
   const formError = useActionData();
   const cart = fakeCart;
+  const username = useSelector((state) => state.user.name);
 
   return (
     <div className="px-4 py-6">
@@ -46,14 +48,27 @@ function CreateOrder() {
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
-          <input className="input grow" type="text" name="customer" required />
+          <input
+            defaultValue={username}
+            className="input grow"
+            type="text"
+            name="customer"
+            required
+          />
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Phone number</label>
           <div className="grow">
             <input className="input w-full" type="tel" name="phone" required />
-            {formError?.phone && <p className="mt-2 text-sm text-rose-600 bg-rose-200 rounded-md p-2" role="alert">{formError.phone}</p>}
+            {formError?.phone && (
+              <p
+                className="mt-2 rounded-md bg-rose-200 p-2 text-sm text-rose-600"
+                role="alert"
+              >
+                {formError.phone}
+              </p>
+            )}
           </div>
         </div>
 
@@ -79,7 +94,9 @@ function CreateOrder() {
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label className="font-medium" htmlFor="priority">Want to yo give your order priority?</label>
+          <label className="font-medium" htmlFor="priority">
+            Want to yo give your order priority?
+          </label>
         </div>
         <input type="hidden" name="cart" value={JSON.stringify(cart)} />
         <div>
