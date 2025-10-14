@@ -57,3 +57,6 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+export const getTotalCartQuantity = (cart) => cart.reduce((acc, item) => acc + item.quantity, 0);
+export const getTotalCartPrice = (cart) => cart.reduce((acc, item) => acc + item.totalPrice, 0);
