@@ -7,12 +7,13 @@ const isValidPhone = (str) =>
 import { Form, redirect, useActionData, useNavigation } from "react-router";
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getCart, getTotalCartPrice } from "../cart/cartSlice";
 import EmptyCart from "../cart/EmptyCart";
 import store from "../../store";
 import { formatCurrency } from "../../utils/helpers";
 import { useState } from "react";
+import { fetchAddress } from "../user/userSlice";
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
@@ -20,10 +21,16 @@ function CreateOrder() {
   const isSubmitting = navigation.state === "submitting";
   const formError = useActionData();
   const cart = useSelector(getCart);
-  const username = useSelector((state) => state.user.name);
+  const {
+    name: username,
+    status,
+    address,
+    position,
+    errorAddress,
+  } = useSelector((state) => state.user);
   const totalCartPrice = useSelector(getTotalCartPrice);
+  const dispatch = useDispatch();
   const totalPrice = totalCartPrice + (withPriority ? totalCartPrice * 0.2 : 0);
-
   if (!cart.length) {
     return <EmptyCart />;
   }
@@ -62,13 +69,39 @@ function CreateOrder() {
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
           <div className="grow">
-            <input
-              className="input w-full"
-              type="text"
-              name="address"
-              required
-              placeholder="Enter your address"
-            />
+            <div className="relative w-full">
+              <input
+                className="input w-full"
+                type="text"
+                name="address"
+                required
+                placeholder="Enter your address"
+                defaultValue={address}
+                disabled={status === "loading"}
+              />
+              {!position?.latitude && !position?.longitude && (
+                <span className="absolute top-1/2 right-1.5 -translate-y-1/2">
+                  <Button
+                    type="small"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(fetchAddress());
+                    }}
+                    disabled={status === "loading"}
+                  >
+                    Get Address
+                  </Button>
+                </span>
+              )}
+            </div>
+            {errorAddress && (
+              <p
+                className="mt-2 rounded-md bg-rose-200 p-2 text-sm text-rose-600"
+                role="alert"
+              >
+                {`We couldn't fetch your address automatically. Please enter it manually. (${errorAddress})`}
+              </p>
+            )}
           </div>
         </div>
 
