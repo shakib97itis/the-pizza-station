@@ -6,7 +6,7 @@ const initialState = {
     name: "",
     address: "",
     position: {},
-    error: null,
+    errorAddress: null,
 }
 
 async function fetchLocation() {
@@ -45,7 +45,7 @@ const userSlice = createSlice({
             state.error = null;
         }).addCase(fetchAddress.rejected, (state, action) => {
             state.status = "error";
-            state.error = action.error.message;
+            state.errorAddress = action.error.message;
         });
     }
 });
