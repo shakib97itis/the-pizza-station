@@ -11,6 +11,7 @@ import CreateOrder, {
 } from "./features/order/CreateOrder";
 import AppLayout from "./ui/AppLayout";
 import { Provider } from "react-redux";
+import { action as actionUpdateOrder } from "./features/order/UpdateOrder";
 import store from "./store";
 
 const router = createBrowserRouter([
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
         element: <Order />,
         loader: loaderOrder,
         errorElement: <Error />,
+        action: actionUpdateOrder,
       },
       {
         path: "/order/new",
