@@ -13,6 +13,7 @@ import AppLayout from "./ui/AppLayout";
 import { Provider } from "react-redux";
 import { action as actionUpdateOrder } from "./features/order/UpdateOrder";
 import store from "./store";
+import PageNotFound from "./ui/PageNotFound";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: "/order/new",
         element: <CreateOrder />,
         action: actionCreateOrder,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },
