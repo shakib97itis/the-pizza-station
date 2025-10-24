@@ -6,10 +6,9 @@
 
 ## 🚀 Live Demo
 
-👉 [View Live Project](#)
+👉 [View Live Project](https://thepizzastation.netlify.app/)
 
 ![App Preview](/public/screenshot.png)
-
 
 ---
 
@@ -28,7 +27,7 @@
 ✅ **Product Listing** – Browse delicious pizza options from the menu
 ✅ **Cart Management** – Add, remove, and manage items easily
 ✅ **Order System** – Place and manage pizza orders smoothly
-✅ **Search Functionality** – Quickly find your favorite pizza
+✅ **Order Search Functionality** – Quickly find your order status by order ID
 ✅ **Responsive Design** – Fully optimized for mobile, tablet, and desktop
 
 ---
@@ -53,7 +52,7 @@
 
 ## 👨‍💻 Author
 
-**Shakib**
+**Shakibul Islam**
 [GitHub Profile](https://github.com/shakib97itis)
 
 ---
