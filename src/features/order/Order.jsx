@@ -24,6 +24,7 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+  console.log({ priority });
 
   const fetcher = useFetcher();
 
@@ -88,7 +89,7 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
-      <UpdateOrder />
+      {!priority && <UpdateOrder />}
     </div>
   );
 }
