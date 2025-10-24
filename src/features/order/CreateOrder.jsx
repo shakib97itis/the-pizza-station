@@ -115,7 +115,7 @@ function CreateOrder() {
             onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label className="font-medium" htmlFor="priority">
-            Want to yo give your order priority?
+            Want to give your order priority?
           </label>
         </div>
         <input type="hidden" name="cart" value={JSON.stringify(cart)} />
